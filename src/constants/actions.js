@@ -1,0 +1,4 @@
+export default {
+  RECEIVE_USER: 'RECEIVE_USER',
+  USER_LOGOUT: 'USER_LOGOUT',
+};
