@@ -10,7 +10,6 @@ import sagas from './src/redux/sagas';
 
 import HomeView from './src/views/Home';
 import TourView from './src/views/Tour';
-import AuthView from './src/views/Auth';
 import colors from './src/constants/colors';
 
 export default class App extends Component {
@@ -30,7 +29,6 @@ export default class App extends Component {
     sagaMiddleware.run(sagas);
     const MainNavigator = TabNavigator({
       tour: { screen: TourView },
-      auth: { screen: AuthView },
       main: {
         screen: TabNavigator({
           home: { screen: HomeView },

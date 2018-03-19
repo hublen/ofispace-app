@@ -19,13 +19,13 @@ class WelcomeScreen extends Component {
     const tourGuideShowed =
       await AsyncStorage.getItem(constants.tourGuideShowed);
     if (tourGuideShowed) {
-      this.props.navigation.navigate('auth');
+      this.props.navigation.navigate('home');
     }
   }
 
   onSlidesComplete = async () => {
     AsyncStorage.setItem(constants.tourGuideShowed, 'true');
-    this.props.navigation.navigate('auth');
+    this.props.navigation.navigate('home');
   };
 
   render() {
