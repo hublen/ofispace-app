@@ -5,6 +5,10 @@ export const userEntered = (payload) => ({
   payload,
 });
 
+export const userNotEntered = () => ({
+  type: types.USER_NOT_ENTERED,
+});
+
 export const userlogOut = (payload) => ({
   type: types.USER_LOGOUT,
   payload,

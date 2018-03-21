@@ -1,8 +1,8 @@
-import { fork, takeEvery, call, put } from 'redux-saga/effects';
+import { fork, takeEvery, call, put, select } from 'redux-saga/effects';
 import { Alert, AsyncStorage } from 'react-native';
 import { key } from '../../api';
 
-import { userEntered } from '../actions/user';
+import { userEntered, userNotEntered } from '../actions/user';
 import { changeAuthTab } from '../actions/session';
 import { checkLogin } from '../selectors/user';
 import { postLogin, postSignUp, postRecovery, checkUserTokenInfo } from '../../data/user';
@@ -87,13 +87,15 @@ function * handleReceiveUser(action) {
 }
 
 function * handleCheckLogin() {
-  const { token } = yield call(checkLogin);
+  const token = yield select(checkLogin);
   if (!token) {
+    yield put(userNotEntered());
     return undefined;
   }
   const { response, error } = yield call(checkUserTokenInfo, token);
   if (error) {
-    return removeAuthToken();
+    yield put(userNotEntered());
+    return yield call(removeAuthToken);
   }
   return yield put(userEntered(response));
 }

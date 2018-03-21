@@ -3,7 +3,7 @@ import { Facebook } from 'expo';
 import api from '../api';
 
 export const sendFacebookRequest = async () => {
-  const { type, token } = await Facebook.logInWithReadPermissionsAsync('277053319414273', {
+  const { type, token } = await Facebook.logInWithReadPermissionsAsync('439642249802701', {
     permissions: ['public_profile'],
   });
 
