@@ -3,6 +3,7 @@ import { View, Alert } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { Button, Input } from '../../../core';
+import constants from '../../../../constants';
 import messages from '../../../../constants/messages';
 
 class SignUp extends Component {
@@ -12,7 +13,7 @@ class SignUp extends Component {
       email: undefined,
       password: undefined,
       confirmPassword: undefined,
-      phoneNumber: undefined,
+      phone: undefined,
       name: undefined,
     };
   }
@@ -23,10 +24,15 @@ class SignUp extends Component {
       password,
       name,
       confirmPassword,
-      phoneNumber,
+      phone,
     } = this.state;
     const data = {
-      email, password, name, confirmPassword, phoneNumber,
+      avatar_url: constants.avatarurl,
+      email,
+      password,
+      name,
+      confirmPassword,
+      phone,
     };
     if (data.password === data.confirmPassword) {
       this.props.requestSignUp(data);
@@ -62,7 +68,7 @@ class SignUp extends Component {
           placeholder="Escribe de nuevo tú contraseña"
         />
         <Input
-          onChange={(phoneNumber) => this.setState({ phoneNumber })}
+          onChange={(phone) => this.setState({ phone })}
           title="Número telefónico"
           keyboard="phone-pad"
           placeholder="Escribe tú número celular"

@@ -27,3 +27,8 @@ export const requestFacebookLogin = (payload) => ({
 export const checkUserLogin = () => ({
   type: types.CHECK_LOGIN,
 });
+
+export const requestSignUp = (payload) => ({
+  type: types.REQUEST_SIGN_UP,
+  payload,
+}); 

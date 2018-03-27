@@ -4,7 +4,7 @@ import api from '../api';
 
 export const sendFacebookRequest = async () => {
   const { type, token } = await Facebook.logInWithReadPermissionsAsync('439642249802701', {
-    permissions: ['public_profile'],
+    permissions: ['public_profile', 'email'],
   });
 
   if (type === 'cancel') {
@@ -21,7 +21,7 @@ export const sendFacebookRequest = async () => {
       if (rjson.status === 'notYetCreated') {
         return ({ error: undefined, data: { status: 'notYetCreated', accessToken: token } });
       } else if (rjson.status !== 'success') {
-        return ({ error: 'Actualmente no cuentas con tu cuenta registrada en Central Ofiz.', data: undefined });
+        return ({ error: rjson.message, data: undefined });
       }
       return ({ status: 'success', data: rjson.data, error: undefined });
     })
@@ -39,18 +39,20 @@ export const notYeatCreatedAccount = (accessToken) => (
     .then((responseData) =>
       ({ createdError: undefined, response: { responseData, accessToken } }))
     .catch(() => ({ createdError: 'No ha sido posible conectarse con los servidores de Facebook', response: undefined }))
-    .done()
 );
 
 export const postUserAndSignUp = ({ responseData, accessToken }) => {
+  console.log(responseData);
   const data = {
     name: responseData.name,
-    idFacebook: responseData.id,
+    facebook_id: responseData.id,
     email: responseData.email,
   };
+  console.log(data);
   return api.user.signUp(data)
     .then((res) => res.json())
     .then((rjson) => {
+      console.log(rjson);
       if (rjson.status !== 'success') {
         return ({ error: 'Ha ocurrido un error intentando crear tu cuenta' });
       }

@@ -1,7 +1,7 @@
 import { fork, takeEvery, call, put } from 'redux-saga/effects';
 import { Alert } from 'react-native';
 
-import { sendFacebookRequest, postUserAndSignUp } from '../../data/facebook';
+import { sendFacebookRequest, postUserAndSignUp, notYeatCreatedAccount } from '../../data/facebook';
 import { userEntered } from '../actions/user';
 
 import types from '../../constants/actions';
@@ -16,10 +16,12 @@ function * handleRequestFacebookLogin(action) {
       [{ text: 'OK' }],
     );
   }
-
-  if (data.status === 'notYetCreated') {
+  console.log(data);
+  if (data && data.status === 'notYetCreated') {
+    console.log('in')
     const { response, createdError } =
-      yield call(sendFacebookRequest, data.accessToken);
+      yield call(notYeatCreatedAccount, data.accessToken);
+    console.log('error2');
     if (createdError !== undefined) {
       return Alert.alert(
         messages.errorHeader,
