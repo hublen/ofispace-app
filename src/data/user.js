@@ -35,3 +35,10 @@ export const checkUserTokenInfo = (token) => (
     ))
     .catch((error) => ({ error }))
 );
+
+export const registerUserToken = (token, userToken) => (
+  api.user.registerToken(token, userToken)
+    .then((response) => response.json())
+    .then((response) => ({ response }))
+    .catch((error) => ({ error }))
+);

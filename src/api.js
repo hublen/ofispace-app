@@ -19,6 +19,11 @@ const postHeader = {
 module.exports = {
   key: '@lookat:session',
   user: {
+    registerToken(pushToken, token) {
+      const url = `${host}/user/token?token=${pushToken}`;
+      postHeader.headers.authorization = token;
+      return fetch(url, postHeader);
+    },
     login(data) {
       const url = `${host}/auth/login`;
       postHeader.body = JSON.stringify(data);

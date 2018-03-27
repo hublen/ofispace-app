@@ -1,11 +1,12 @@
 import { fork, takeEvery, call, put, select } from 'redux-saga/effects';
 import { Alert, AsyncStorage } from 'react-native';
+import { Permissions, Notifications } from 'expo';
 import { key } from '../../api';
 
 import { userEntered, userNotEntered } from '../actions/user';
 import { changeAuthTab } from '../actions/session';
 import { checkLogin } from '../selectors/user';
-import { postLogin, postSignUp, postRecovery, checkUserTokenInfo } from '../../data/user';
+import { postLogin, postSignUp, postRecovery, checkUserTokenInfo, registerUserToken } from '../../data/user';
 
 import tabs from '../../constants/tabs';
 import types from '../../constants/actions';
@@ -17,6 +18,24 @@ const onSuccessLogin = async (data) => {
   } catch (error) {
     console.log(error); // eslint-disable-line
   }
+};
+
+const getPushToken = async () => {
+  const previousToken = await AsyncStorage.getItem('pushtoken');
+  if (previousToken) {
+    return ({ status: 'success', token: previousToken });
+  }
+
+  const { status } = await
+    Permissions.askAsync(Permissions.REMOTE_NOTIFICATIONS);
+
+  if (status !== 'granted') {
+    return ({ status: 'error', message: 'Es necesario permitir a la aplicación el uso de notificaciones para hacerte llegar cualquier información necesaria.' });
+  }
+
+  const token = await Notifications.getExpoPushTokenAsync();
+  AsyncStorage.setItem('pushtoken', token);
+  return ({ token });
 };
 
 const removeAuthToken = () => {
@@ -83,6 +102,17 @@ function * handleRequestRecoverPassword(action) {
 }
 
 function * handleReceiveUser(action) {
+  const { token, status, message } = yield call(getPushToken);
+  if (status === 'error') {
+    Alert.alert(
+      'Espera',
+      message,
+      [{ text: 'OK' }],
+    );
+  } else {
+    yield call(registerUserToken, token, action.payload.token);
+  }
+
   yield call(onSuccessLogin, JSON.stringify(action.payload));
 }
 
