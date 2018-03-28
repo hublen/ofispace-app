@@ -5,4 +5,8 @@ export const changeAuthTab = (payload) => ({
   payload,
 });
 
+export const setUpHomeView = () => ({
+  type: types.SETUP_HOME_VIEW,
+});
+
 export default changeAuthTab;

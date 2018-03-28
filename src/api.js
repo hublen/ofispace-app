@@ -44,4 +44,16 @@ module.exports = {
       return fetch(url, postHeader);
     },
   },
+  location: {
+    actualCity({ latitude, longitude }) {
+      const url = `${host}/cities/nearest?lat=${latitude}&&lng=${longitude}`;
+      return fetch(url, getHeader);
+    },
+  },
+  places: {
+    byCity(id) {
+      const url = `${host}/places/city?city=${id}`;
+      return fetch(url, getHeader);
+    },
+  },
 };
