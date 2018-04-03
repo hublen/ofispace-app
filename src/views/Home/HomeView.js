@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { SafeAreaView } from 'react-navigation';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import { Ionicons } from '@expo/vector-icons'; // eslint-disable-line
 import { Map as ImmutableMap } from 'immutable';
-import { View } from 'react-native';
+import { ScrollView } from 'react-native';
 
 import { checkUserLogin } from '../../redux/actions/user';
 import { setUpHomeView } from '../../redux/actions/session';
 import { navigationPropTypes } from '../../proptypes';
 
+import common from '../../style/common';
 import AuthView from '../../components/users/Auth';
 import PlaceCard from '../../components/Places/PlaceCard';
 
@@ -17,7 +20,7 @@ class HomeView extends Component {
     title: 'Home',
     headerTitle: 'CentralOfiz',
     headerLeft: null,
-    // tabBarIcon: ({ tintColor }) => (<Icon style={styles.quantityButton} size={20} flexDirection="column" name="add" />),
+    tabBarIcon: ({ tintColor }) => (<Ionicons name="ios-home-outline" size={32} color={tintColor} style={{ paddingTop: 10 }} />),
   }
 
   static defaultProps = {
@@ -41,15 +44,19 @@ class HomeView extends Component {
 
   render() {
     return (
-      <View>
-        <AuthView
-          visible={false}
-          navigation={this.props.navigation}
-        />
-        {this.props.places.toList().map((place) => (
-          <PlaceCard place={place} />
-        ))}
-      </View>
+      <SafeAreaView style={common.view}>
+        <ScrollView
+          style={common.view}
+        >
+          <AuthView
+            visible={false}
+            navigation={this.props.navigation}
+          />
+          {this.props.places.toList().map((place) => (
+            <PlaceCard place={place} />
+          ))}
+        </ScrollView>
+      </SafeAreaView>
     );
   }
 }
