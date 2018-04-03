@@ -16,12 +16,9 @@ function * handleRequestFacebookLogin(action) {
       [{ text: 'OK' }],
     );
   }
-  console.log(data);
   if (data && data.status === 'notYetCreated') {
-    console.log('in')
     const { response, createdError } =
       yield call(notYeatCreatedAccount, data.accessToken);
-    console.log('error2');
     if (createdError !== undefined) {
       return Alert.alert(
         messages.errorHeader,

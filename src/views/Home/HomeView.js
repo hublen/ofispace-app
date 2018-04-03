@@ -3,17 +3,23 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map as ImmutableMap } from 'immutable';
-import { View, Text } from 'react-native';
-import { Card } from 'react-native-elements';
+import { View } from 'react-native';
 
 import { checkUserLogin } from '../../redux/actions/user';
 import { setUpHomeView } from '../../redux/actions/session';
 import { navigationPropTypes } from '../../proptypes';
 
-import style from './style';
 import AuthView from '../../components/users/Auth';
+import PlaceCard from '../../components/Places/PlaceCard';
 
 class HomeView extends Component {
+  static navigationOptions = {
+    title: 'Home',
+    headerTitle: 'CentralOfiz',
+    headerLeft: null,
+    // tabBarIcon: ({ tintColor }) => (<Icon style={styles.quantityButton} size={20} flexDirection="column" name="add" />),
+  }
+
   static defaultProps = {
     navigation: null,
     loggingIn: false,
@@ -41,20 +47,7 @@ class HomeView extends Component {
           navigation={this.props.navigation}
         />
         {this.props.places.toList().map((place) => (
-          <Card
-            image={{ uri: place.get('coverPicture') }}
-          >
-            <Text style={style.cardTitle}>{place.get('name')}</Text>
-            <Text
-              numberOfLines={2}
-              style={style.cardDescription}
-            >
-              {place.get('description')}
-            </Text>
-            <Text style={style.priceCard}>
-              ${place.get('price_per_hour')} MXN / Hora
-            </Text>
-          </Card>
+          <PlaceCard place={place} />
         ))}
       </View>
     );

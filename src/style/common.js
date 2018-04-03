@@ -21,4 +21,22 @@ export default {
   regularChildViewPadding: {
     padding: 15,
   },
+  mainCardView: {
+    height: 'auto',
+    marginBottom: 3,
+  },
+  innerViewPadding: {
+    paddingHorizontal: 15,
+    paddingVertical: 2,
+  },
+  semiBorder: {
+    borderColor: 'rgba(0,0,0,0.1)',
+    borderWidth: 1,
+  },
+  shadow: {
+    shadowColor: colors.gray,
+    shadowOffset: { width: 3, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+  },
 };

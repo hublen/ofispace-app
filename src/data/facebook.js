@@ -42,17 +42,14 @@ export const notYeatCreatedAccount = (accessToken) => (
 );
 
 export const postUserAndSignUp = ({ responseData, accessToken }) => {
-  console.log(responseData);
   const data = {
     name: responseData.name,
     facebook_id: responseData.id,
     email: responseData.email,
   };
-  console.log(data);
   return api.user.signUp(data)
     .then((res) => res.json())
     .then((rjson) => {
-      console.log(rjson);
       if (rjson.status !== 'success') {
         return ({ error: 'Ha ocurrido un error intentando crear tu cuenta' });
       }

@@ -9,4 +9,5 @@ export default {
   transparent: 'transparent',
   transparentOverlay: 'rgba(102,102,102,0.6)',
   facebook: '#3b5998',
+  cardTransparentOverlay: 'rgba(0,0,0,0.25)',
 };
