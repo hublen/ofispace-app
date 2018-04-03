@@ -13,6 +13,12 @@ export default {
   submitText: {
     color: colors.inverseText,
   },
+  facebook: {
+    backgroundColor: colors.facebook,
+  },
+  facebookText: {
+    color: colors.inverseText,
+  },
   buttonText: {
     fontSize: 15,
   },
