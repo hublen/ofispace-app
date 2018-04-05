@@ -22,7 +22,7 @@ export default (
     case types.RECEIVE_USER:
       return state.set('loggingIn', false);
     case types.SET_ACTUAL_CITY:
-      return state.set('actualCity', action.payload.id);
+      return state.set('actualCity', action.payload.get('id'));
     default:
       return state;
   }

@@ -1,4 +1,5 @@
 import { fork, takeEvery, call, put } from 'redux-saga/effects';
+import { fromJS } from 'immutable';
 
 import { cityEntered } from '../actions/location';
 import { setActualCity } from '../actions/session';
@@ -12,14 +13,14 @@ function * handleLocationEntered(action) {
     getActualCity,
     action.payload,
   );
-  if (!error) {
-    yield put(setActualCity(response));
-    yield put(cityEntered({ city: response }));
+  if (!error && response) {
+    yield put(setActualCity(fromJS(response)));
+    yield put(cityEntered({ city: fromJS(response) }));
   }
 }
 
 function * handleSetActualCity(action) {
-  yield put(fetchPlacesByCity(action.payload.id));
+  yield put(fetchPlacesByCity(action.payload.get('id')));
 }
 
 function * watchLocationActions() {

@@ -8,6 +8,8 @@ export default {
   regularLighterText: '#686868',
   transparent: 'transparent',
   transparentOverlay: 'rgba(102,102,102,0.6)',
+  semiTransparent: 'rgba(0,0,0,0.1)',
   facebook: '#3b5998',
+  brandOverlay: 'rgba(0,134,118, 0.45)',
   cardTransparentOverlay: 'rgba(0,0,0,0.25)',
 };

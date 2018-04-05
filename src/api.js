@@ -45,8 +45,9 @@ module.exports = {
     },
   },
   location: {
-    actualCity({ latitude, longitude }) {
-      const url = `${host}/cities/nearest?lat=${latitude}&&lng=${longitude}`;
+    actualCity({ lat, lng }) {
+      const url = `${host}/cities/nearest?lat=${lat}&&lng=${lng}`;
+      console.log(url);
       return fetch(url, getHeader);
     },
   },

@@ -7,11 +7,14 @@ import { Ionicons } from '@expo/vector-icons'; // eslint-disable-line
 import { Map as ImmutableMap } from 'immutable';
 import { ScrollView } from 'react-native';
 
+import { selectActualCity } from '../../redux/selectors/cities';
 import { checkUserLogin } from '../../redux/actions/user';
 import { setUpHomeView } from '../../redux/actions/session';
 import { navigationPropTypes } from '../../proptypes';
 
 import common from '../../style/common';
+import SectionHeader from '../../components/core/SectionHeader';
+import CitiesCarouselList from '../../components/Cities/CarouselList';
 import AuthView from '../../components/users/Auth';
 import PlaceCard from '../../components/Places/PlaceCard';
 
@@ -27,10 +30,14 @@ class HomeView extends Component {
     navigation: null,
     loggingIn: false,
     places: ImmutableMap({}),
+    cities: ImmutableMap({}),
+    actualCity: ImmutableMap({ }),
   };
 
   static propTypes = {
     loggingIn: PropTypes.bool,
+    cities: ImmutablePropTypes.map,
+    actualCity: ImmutablePropTypes.map,
     navigation: navigationPropTypes,
     places: ImmutablePropTypes.map,
     checkUserLogin: PropTypes.func.isRequired,
@@ -43,6 +50,7 @@ class HomeView extends Component {
   }
 
   render() {
+    const { actualCity } = this.props;
     return (
       <SafeAreaView style={common.view}>
         <ScrollView
@@ -52,6 +60,11 @@ class HomeView extends Component {
             visible={false}
             navigation={this.props.navigation}
           />
+          <CitiesCarouselList
+            title="¿Vas fuera de la ciudad?"
+            dataSource={this.props.cities}
+          />
+          <SectionHeader title={`Espacios en ${actualCity.get('name')}`} />
           {this.props.places.toList().map((place) => (
             <PlaceCard place={place} />
           ))}
@@ -63,6 +76,8 @@ class HomeView extends Component {
 
 const mapStateToProps = (state) => ({
   loggingIn: state.session.get('loggingIn', false),
+  actualCity: selectActualCity(state),
+  cities: state.cities,
   places: state.places,
 });
 

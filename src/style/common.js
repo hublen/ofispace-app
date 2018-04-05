@@ -39,4 +39,13 @@ export default {
     shadowOpacity: 0.2,
     shadowRadius: 4,
   },
+  sectionView: {
+    borderTopWidth: 1,
+    borderColor: colors.semiTransparent,
+    backgroundColor: colors.regularBackground,
+  },
+  rowContainer: {
+    flexDirection: 'row',
+    flex: 0,
+  },
 };
