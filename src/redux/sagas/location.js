@@ -1,6 +1,7 @@
 import { fork, takeEvery, call, put } from 'redux-saga/effects';
 
 import { cityEntered } from '../actions/location';
+import { setActualCity } from '../actions/session';
 import { getActualCity } from '../../data/location';
 import { fetchPlacesByCity } from '../actions/places';
 
@@ -12,13 +13,13 @@ function * handleLocationEntered(action) {
     action.payload,
   );
   if (!error) {
-    console.log(response);
+    yield put(setActualCity(response));
     yield put(cityEntered({ city: response }));
   }
 }
 
-function * handleCityEntered(action) {
-  yield put(fetchPlacesByCity(action.payload.city.id));
+function * handleSetActualCity(action) {
+  yield put(fetchPlacesByCity(action.payload.id));
 }
 
 function * watchLocationActions() {
@@ -27,8 +28,8 @@ function * watchLocationActions() {
     handleLocationEntered,
   );
   yield takeEvery(
-    types.CITY_ENTERED,
-    handleCityEntered,
+    types.SET_ACTUAL_CITY,
+    handleSetActualCity,
   );
 }
 

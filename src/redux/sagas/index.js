@@ -5,6 +5,7 @@ import facebook from './facebook';
 import session from './session';
 import location from './location';
 import place from './place';
+import cities from './cities';
 
 function * startAppSagas() {
   yield all([
@@ -13,6 +14,7 @@ function * startAppSagas() {
     ...session,
     ...location,
     ...place,
+    ...cities,
   ]);
 }
 

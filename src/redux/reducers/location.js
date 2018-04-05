@@ -10,7 +10,6 @@ export default (state = ImmutableMap(), action) => {
     case types.LOCATION_CHANGED:
       return state.set('coords', fromJS(action.payload));
     case types.CITY_ENTERED:
-      console.log('cityyy', action.payload.city)
       return state.set('city', fromJS(action.payload.city));
     default:
       return state;

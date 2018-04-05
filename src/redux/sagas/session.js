@@ -2,8 +2,10 @@ import { fork, takeEvery, call, put, select } from 'redux-saga/effects';
 import { PermissionsAndroid, Platform } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 
+import { fetchCities } from '../actions/cities';
 import { locationChanged } from '../actions/location';
 import { getActualLocation } from '../selectors/location';
+import { getAllCities } from '../selectors/cities';
 
 import types from '../../constants/actions';
 
@@ -23,6 +25,7 @@ const getGeo = () => new Promise((resolve, reject) => {
 function * handleSetUpHomeView() {
   let granted = true;
   const actualLocation = yield select(getActualLocation);
+  const cities = yield select(getAllCities);
 
   if (Platform.OS === 'android' && parseFloat(DeviceInfo.getSystemVersion()) >= 6) {
     granted = yield call(androidPermissionLocation);
@@ -34,6 +37,10 @@ function * handleSetUpHomeView() {
     if (!(actualLocation.get('longitude') === longitude && actualLocation.get('latitude') === latitude)) {
       yield put((locationChanged({ longitude, latitude })));
     }
+  }
+
+  if (!cities.size) {
+    yield put(fetchCities());
   }
 }
 

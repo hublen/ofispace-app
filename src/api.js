@@ -56,4 +56,10 @@ module.exports = {
       return fetch(url, getHeader);
     },
   },
+  cities: {
+    fetchAll() {
+      const url = `${host}/cities`;
+      return fetch(url, getHeader);
+    },
+  },
 };
