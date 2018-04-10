@@ -6,15 +6,15 @@ import { placesEntered } from '../actions/places';
 import types from '../../constants/actions';
 
 function * handleFetchPlacesByCity(action) {
-  const { response, error } = yield call(
-    fetchPlacesByCity,
-    action.payload,
-  );
+  if (action.payload) {
+    const { response, error } = yield call(
+      fetchPlacesByCity,
+      action.payload,
+    );
 
-  console.log(response);
-
-  if (!error) {
-    yield put(placesEntered(response));
+    if (!error) {
+      yield put(placesEntered(response));
+    }
   }
 }
 

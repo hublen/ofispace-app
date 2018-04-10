@@ -14,12 +14,11 @@ export default {
   imageView: {
     height: 150,
     overflow: 'hidden',
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
+    borderTopLeftRadius: 2,
+    borderTopRightRadius: 2,
   },
   bodyView: {
     padding: 5,
-    height: 65,
     backgroundColor: colors.inverseText,
   },
   image: absouleView,
@@ -29,18 +28,29 @@ export default {
     backgroundColor: colors.cardTransparentOverlay,
   },
   placeTitle: {
-    fontWeight: style.subsectionHeaderFontWeight,
+    fontWeight: 'bold',
     color: colors.regularTextColor,
-    fontSize: style.subSectionHeaderFontSize,
+    fontSize: style.subSectionHeaderFontSize * 1.1,
+    marginTop: 4,
   },
-  placeDescription: {
+  placeType: {
     color: colors.regularLighterText,
-    fontSize: style.subSectionBodyFontSize,
+    fontSize: style.subSectionBodyFontSize * 1.1,
     fontWeight: style.subSectionBodyFontWeight,
   },
   favorite: {
     right: 5,
     top: 5,
     position: 'absolute',
+  },
+  column: {
+    flexDirection: 'column',
+  },
+  price: {
+    paddingTop: style.subSectionHeaderFontSize * 0.5,
+    color: colors.brand,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: style.subSectionHeaderFontSize * 1.2,
   },
 };

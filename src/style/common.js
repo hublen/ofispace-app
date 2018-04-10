@@ -34,10 +34,10 @@ export default {
     borderWidth: 1,
   },
   shadow: {
-    shadowColor: colors.gray,
-    shadowOffset: { width: 3, height: 3 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
+    shadowColor: colors.regularTextColor,
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
   },
   sectionView: {
     borderTopWidth: 1,
@@ -48,4 +48,7 @@ export default {
     flexDirection: 'row',
     flex: 0,
   },
+  flex: (number) => ({
+    flex: number,
+  }),
 };

@@ -20,15 +20,19 @@ const PlaceCard = (props) => {
         <View style={style.imageOverlay} />
       </View>
       <View
-        style={[style.bodyView, common.semiBorder, common.shadow]}
+        style={[style.bodyView, common.semiBorder, common.shadow, common.rowContainer]}
       >
-        <Text style={style.placeTitle}>{place.get('name')}</Text>
-        <Text
-          style={style.placeDescription}
-          numberOfLines={2}
-        >
-          {place.get('description')}
-        </Text>
+        <View style={[common.flex(8), style.column]}>
+          <Text style={style.placeTitle}>{place.get('name')}</Text>
+          <Text
+            style={style.placeType}
+          >
+            {place.get('place_type', 'Cowork')}
+          </Text>
+        </View>
+        <View style={[common.flex(2), style.column, { textAlign: 'center', verticalAlign: 'middle' }]}>
+          <Text style={style.price}>${place.get('price_per_hour', '100')}</Text>
+        </View>
       </View>
     </TouchableOpacity>
   );

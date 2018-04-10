@@ -18,8 +18,8 @@ export default {
     borderTopRightRadius: 20,
   },
   bodyView: {
-    padding: 5,
-    height: 30,
+    padding: 10,
+    height: 40,
     backgroundColor: colors.inverseText,
     borderBottomRadius: 20,
   },
@@ -33,8 +33,13 @@ export default {
     zIndex: 1,
     backgroundColor: colors.brandOverlay,
   },
+  selectedOverlay: {
+    ...absouleView,
+    zIndex: 1,
+    backgroundColor: colors.brandClearerOverlay,
+  },
   cityTitle: {
-    fontWeight: '600',
+    fontWeight: 'bold',
     color: colors.regularTextColor,
     fontSize: style.subSectionHeaderFontSize,
   },

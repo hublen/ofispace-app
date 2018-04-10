@@ -21,7 +21,7 @@ import PlaceCard from '../../components/Places/PlaceCard';
 class HomeView extends Component {
   static navigationOptions = {
     title: 'Home',
-    headerTitle: 'CentralOfiz',
+    headerTitle: 'hublen',
     headerLeft: null,
     tabBarIcon: ({ tintColor }) => (<Ionicons name="ios-home-outline" size={32} color={tintColor} style={{ paddingTop: 10 }} />),
   }
@@ -51,6 +51,8 @@ class HomeView extends Component {
 
   render() {
     const { actualCity } = this.props;
+    const city = actualCity.get('name');
+    // Logging in prop goes inside AuthView
     return (
       <SafeAreaView style={common.view}>
         <ScrollView
@@ -61,10 +63,10 @@ class HomeView extends Component {
             navigation={this.props.navigation}
           />
           <CitiesCarouselList
-            title="¿Vas fuera de la ciudad?"
+            title="Explore"
             dataSource={this.props.cities}
           />
-          <SectionHeader title={`Espacios en ${actualCity.get('name')}`} />
+          <SectionHeader title={city ? `Spaces in ${city}` : 'Spaces'} />
           {this.props.places.toList().map((place) => (
             <PlaceCard place={place} />
           ))}

@@ -23,7 +23,7 @@ const CityCard = (props) => {
           style={style.image}
           source={{ uri: city.get('cover') }}
         />
-        <View style={props.actualCity.get('id') === city.get('id') ? undefined : style.imageOverlay} />
+        <View style={props.actualCity.get('id') === city.get('id') ? style.selectedOverlay : style.imageOverlay} />
       </View>
       <View
         style={[style.bodyView, common.semiBorder, common.shadow]}

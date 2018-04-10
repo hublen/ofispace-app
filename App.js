@@ -9,11 +9,14 @@ import reducers from './src/redux/reducers';
 import sagas from './src/redux/sagas';
 
 import HomeView from './src/views/Home';
+import ProfileView from './src/views/Profile';
+import SearchView from './src/views/Search';
+import HistoryView from './src/views/History';
 import TourView from './src/views/Tour';
 import colors from './src/constants/colors';
 
-export default class App extends Component {
-  componentWillMount() {
+class App extends Component {
+  componentDidMount() {
 
   }
 
@@ -32,6 +35,9 @@ export default class App extends Component {
       main: {
         screen: TabNavigator({
           home: { screen: HomeView },
+          search: { screen: SearchView },
+          history: { screen: HistoryView },
+          profile: { screen: ProfileView },
         }, {
           swipeEnabled: false,
           lazy: true,
@@ -41,7 +47,7 @@ export default class App extends Component {
             labelStyle: { fontSize: 12 },
             indicatorStyle: { backgroundColor: colors.brand },
             activeTintColor: colors.brand,
-            inactiveTintColor: colors.gray,
+            inactiveTintColor: colors.regularTextColor,
           },
         }),
       },
@@ -59,3 +65,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default App;

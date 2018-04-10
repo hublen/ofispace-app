@@ -20,7 +20,9 @@ function * handleLocationEntered(action) {
 }
 
 function * handleSetActualCity(action) {
-  yield put(fetchPlacesByCity(action.payload.get('id')));
+  if (action.payload) {
+    yield put(fetchPlacesByCity(action.payload.get('id')));
+  }
 }
 
 function * watchLocationActions() {
