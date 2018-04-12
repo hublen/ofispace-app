@@ -8,7 +8,6 @@ export default (
 ) => {
   switch (action.type) {
     case types.PLACES_ENTERED:
-      console.log(action.payload);
       return ImmutableMap().withMutations((innerMap) => {
         Object.keys(action.payload).forEach((key) => {
           const value = action.payload[key];

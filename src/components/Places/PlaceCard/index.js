@@ -20,7 +20,12 @@ const PlaceCard = (props) => {
         <View style={style.imageOverlay} />
       </View>
       <View
-        style={[style.bodyView, common.semiBorder, common.shadow, common.rowContainer]}
+        style={
+          [
+            style.bodyView,
+            common.semiBorder, common.shadow, common.rowContainer,
+          ]
+        }
       >
         <View style={[common.flex(8), style.column]}>
           <Text style={style.placeTitle}>{place.get('name')}</Text>
@@ -30,7 +35,7 @@ const PlaceCard = (props) => {
             {place.get('place_type', 'Cowork')}
           </Text>
         </View>
-        <View style={[common.flex(2), style.column, { textAlign: 'center', verticalAlign: 'middle' }]}>
+        <View style={[common.flex(2), style.column]}>
           <Text style={style.price}>${place.get('price_per_hour', '100')}</Text>
         </View>
       </View>

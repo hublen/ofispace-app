@@ -34,12 +34,13 @@ const ModalView = (props) => (
 ModalView.defaultProps = {
   visible: false,
   closable: true,
+  close: undefined,
 };
 
 ModalView.propTypes = {
   visible: PropTypes.bool,
   closable: PropTypes.bool,
-  close: PropTypes.func.isRequired,
+  close: PropTypes.func,
   children: PropTypes.element.isRequired,
 };
 

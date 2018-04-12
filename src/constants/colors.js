@@ -2,6 +2,7 @@ export default {
   brand: '#01CBF3',
   alternBrand: '#FB5A6B',
   inverseText: '#FFF',
+  lighterInverseText: '#F7F7F7',
   submit: '#37D343',
   regularBackground: '#FAFAFA',
   regularTextColor: '#494848',

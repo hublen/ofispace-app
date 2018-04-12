@@ -1,7 +1,7 @@
-import { fork, takeEvery, call, put, select } from 'redux-saga/effects';
+import { fork, takeEvery, call, put } from 'redux-saga/effects';
 import { Alert, AsyncStorage } from 'react-native';
 import { Permissions, Notifications } from 'expo';
-import { key } from '../../api';
+import api from '../../api';
 
 import { userEntered, userNotEntered } from '../actions/user';
 import { changeAuthTab } from '../actions/session';
@@ -14,7 +14,7 @@ import messages from '../../constants/messages';
 
 const onSuccessLogin = async (data) => {
   try {
-    await AsyncStorage.setItem(key, data);
+    await AsyncStorage.setItem(api.key, data);
   } catch (error) {
     console.log(error); // eslint-disable-line
   }
@@ -39,7 +39,7 @@ const getPushToken = async () => {
 };
 
 const removeAuthToken = () => {
-  AsyncStorage.removeItem(key);
+  AsyncStorage.removeItem(api.key);
 };
 
 function * handleRequestUserLogin(action) {
@@ -48,8 +48,7 @@ function * handleRequestUserLogin(action) {
     action.payload.data,
   );
   if (response.status === 'success') {
-    yield put(userEntered(response.data));
-    return action.payload.navigation.navigate('home');
+    return yield put(userEntered(response.data));
   }
 
   return Alert.alert(
@@ -113,14 +112,13 @@ function * handleReceiveUser(action) {
     yield call(registerUserToken, token, action.payload.token);
   }
 
-  yield call(onSuccessLogin, JSON.stringify(action.payload));
+  yield call(onSuccessLogin, action.payload.token);
 }
 
 function * handleCheckLogin() {
-  const token = yield select(checkLogin);
+  const token = yield call(checkLogin);
   if (!token) {
-    yield put(userNotEntered());
-    return undefined;
+    return yield put(userNotEntered());
   }
   const { response, error } = yield call(checkUserTokenInfo, token);
   if (error) {
@@ -128,6 +126,13 @@ function * handleCheckLogin() {
     return yield call(removeAuthToken);
   }
   return yield put(userEntered(response));
+}
+
+function * handleUserLogout(action) {
+  const { navigation } = action.payload;
+  AsyncStorage.removeItem(api.key);
+  yield put(userNotEntered());
+  yield call(navigation.navigate, 'home');
 }
 
 function * watchUserActions() {
@@ -150,6 +155,10 @@ function * watchUserActions() {
   yield takeEvery(
     types.CHECK_LOGIN,
     handleCheckLogin,
+  );
+  yield takeEvery(
+    types.USER_LOGOUT,
+    handleUserLogout,
   );
 }
 

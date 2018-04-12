@@ -7,6 +7,7 @@ export const postLogin = (data) => (
       { response }
     ))
     .catch((error) => ({ error }))
+    .catch((error) => ({ error }))
 );
 
 export const postSignUp = (data) => (
@@ -31,7 +32,7 @@ export const checkUserTokenInfo = (token) => (
   api.user.userInfo(token)
     .then((response) => response.json())
     .then((response) => (
-      { response: response.data[0] }
+      { response: response.data }
     ))
     .catch((error) => ({ error }))
 );

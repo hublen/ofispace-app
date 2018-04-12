@@ -50,16 +50,15 @@ class HomeView extends Component {
   }
 
   render() {
-    const { actualCity } = this.props;
+    const { actualCity, loggingIn } = this.props;
     const city = actualCity.get('name');
-    // Logging in prop goes inside AuthView
     return (
       <SafeAreaView style={common.view}>
         <ScrollView
           style={common.view}
         >
           <AuthView
-            visible={false}
+            visible={loggingIn}
             navigation={this.props.navigation}
           />
           <CitiesCarouselList
@@ -68,7 +67,7 @@ class HomeView extends Component {
           />
           <SectionHeader title={city ? `Spaces in ${city}` : 'Spaces'} />
           {this.props.places.toList().map((place) => (
-            <PlaceCard place={place} />
+            <PlaceCard key={place.get('id')} place={place} />
           ))}
         </ScrollView>
       </SafeAreaView>

@@ -21,7 +21,6 @@ export default {
     padding: 10,
     height: 40,
     backgroundColor: colors.inverseText,
-    borderBottomRadius: 20,
   },
   innerViewPadding: {
     paddingHorizontal: 4,

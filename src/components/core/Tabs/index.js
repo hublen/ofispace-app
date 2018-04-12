@@ -16,7 +16,7 @@ const Tabs = (props) => (
     {props.options.map((option) => (
       <TouchableOpacity
         onPress={() => props.onPress(option.value)}
-        key={option.value}
+        key={option.label}
         style={styles.tab}
       >
         <Text style={styles.tabText}>{option.label.toUpperCase()}</Text>
@@ -26,12 +26,15 @@ const Tabs = (props) => (
   </View>
 );
 
+Tabs.defaultProps = {
+  options: [],
+};
+
 Tabs.propTypes = {
-  options: PropTypes.shape({
+  options: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.string.isRequired,
-    label: PropTypes.func.isRequired,
-    map: PropTypes.func.isRequired,
-  }).isRequired,
+    label: PropTypes.string.isRequired,
+  })),
   activeTab: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
 };

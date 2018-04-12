@@ -47,7 +47,6 @@ module.exports = {
   location: {
     actualCity({ lat, lng }) {
       const url = `${host}/cities/nearest?lat=${lat}&&lng=${lng}`;
-      console.log(url);
       return fetch(url, getHeader);
     },
   },

@@ -28,7 +28,12 @@ export const checkUserLogin = () => ({
   type: types.CHECK_LOGIN,
 });
 
+export const requestLogin = (payload) => ({
+  type: types.REQUEST_USER_LOGIN,
+  payload,
+});
+
 export const requestSignUp = (payload) => ({
   type: types.REQUEST_SIGN_UP,
   payload,
-}); 
+});
