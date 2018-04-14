@@ -1,10 +1,33 @@
 import { SCREEN_WIDTH, SCREEN_HEIGHT } from '../constants/dimensions';
 import colors from '../constants/colors';
+import styles from '../constants/styles';
 
 export default {
   view: {
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
+    backgroundColor: colors.regularBackground,
+  },
+  viewTitle: {
+    fontSize: styles.sectionHeaderFontSize * 1.7,
+    fontWeight: styles.sectionHeaderFontWeight,
+    color: colors.regularTextColor,
+  },
+  viewDescription: {
+    color: colors.regularLighterText,
+    fontSize: styles.subSectionBodyFontSize,
+    fontWeight: styles.subSectionBodyFontWeight,
+    marginBottom: 7,
+  },
+  viewStrongDescription: {
+    color: colors.regularLighterText,
+    fontSize: styles.subSectionBodyFontSize,
+    fontWeight: styles.subSectionStrongBodyFontWeight,
+    marginBottom: 7,
+  },
+  sectionView: {
+    borderTopWidth: 1,
+    borderColor: colors.semiTransparent,
     backgroundColor: colors.regularBackground,
   },
   overlay: {
@@ -38,11 +61,6 @@ export default {
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.1,
     shadowRadius: 3,
-  },
-  sectionView: {
-    borderTopWidth: 1,
-    borderColor: colors.semiTransparent,
-    backgroundColor: colors.regularBackground,
   },
   rowContainer: {
     flexDirection: 'row',

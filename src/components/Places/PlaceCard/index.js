@@ -1,14 +1,16 @@
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import PropTypes from 'prop-types';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
 
 import common from '../../../style/common';
 import style from './style';
 
 const PlaceCard = (props) => {
-  const { place } = props;
+  const { place, onPress } = props;
   return (
     <TouchableOpacity
+      onPress={() => onPress(place.get('id'))}
       style={[common.mainCardView, common.innerViewPadding]}
     >
       <View style={style.imageView} >
@@ -45,6 +47,7 @@ const PlaceCard = (props) => {
 
 PlaceCard.propTypes = {
   place: ImmutablePropTypes.map.isRequired,
+  onPress: PropTypes.func.isRequired,
 };
 
 export default PlaceCard;

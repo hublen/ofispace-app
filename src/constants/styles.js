@@ -8,6 +8,7 @@ export default {
   subSectionHeaderFontSize: 15,
   subSectionBodyFontSize: 10,
   subSectionBodyFontWeight: '400',
+  subSectionStrongBodyFontWeight: '600',
   sectionHeaderColor: colors.regularTextColor,
   sectionBodyFontWeight: '300',
   sectionHeaderFontWeight: '700',

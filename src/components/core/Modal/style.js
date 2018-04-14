@@ -5,9 +5,16 @@ const styles = {
     flex: 1,
     backgroundColor: colors.regularBackground,
   },
+  viewPadding: {
+    paddingVertical: 20,
+  },
+  scrollPadding: {
+    paddingHorizontal: 10,
+    paddingBottom: 30,
+  },
   close: {
     position: 'absolute',
-    top: 10,
+    top: 20,
     margin: 8,
     elevation: 40,
     right: 8,

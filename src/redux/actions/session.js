@@ -14,4 +14,14 @@ export const setActualCity = (payload) => ({
   payload,
 });
 
+export const setActualPlace = (payload) => ({
+  type: types.SET_ACTUAL_PLACE,
+  payload,
+});
+
+export const closePlaceModal = (payload) => ({
+  type: types.CLOSE_PLACE_MODAL,
+  payload,
+});
+
 export default changeAuthTab;

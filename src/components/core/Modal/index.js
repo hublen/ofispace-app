@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, ScrollView, TouchableOpacity, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons'; // eslint-disable-line
 
 import PropTypes from 'prop-types';
 
@@ -14,9 +14,17 @@ const ModalView = (props) => (
     onRequestClose={props.close}
     visible={props.visible}
   >
-    <ScrollView style={styles.scroller}>
-      {props.children}
-    </ScrollView>
+    <View style={[{ flex: 1 }, props.padding ? styles.viewPadding : undefined]}>
+      <ScrollView
+        style={[
+          styles.scroller,
+          props.padding ? styles.scrollPadding : undefined,
+          props.styles,
+        ]}
+      >
+        {props.children}
+      </ScrollView>
+    </View>
     {props.closable &&
     <TouchableOpacity onPress={props.close} style={styles.close}>
       <View>
@@ -35,12 +43,16 @@ ModalView.defaultProps = {
   visible: false,
   closable: true,
   close: undefined,
+  padding: false,
+  styles: {},
 };
 
 ModalView.propTypes = {
   visible: PropTypes.bool,
   closable: PropTypes.bool,
   close: PropTypes.func,
+  padding: PropTypes.bool,
+  styles: PropTypes.object, // eslint-disable-line
   children: PropTypes.element.isRequired,
 };
 

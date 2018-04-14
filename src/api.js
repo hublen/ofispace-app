@@ -55,6 +55,18 @@ module.exports = {
       const url = `${host}/places/city?city=${id}`;
       return fetch(url, getHeader);
     },
+    fetchAddress(id) {
+      const url = `${host}/address?id=${id}`;
+      return fetch(url, getHeader);
+    },
+    fetchAmenities(id) {
+      const url = `${host}/place/amenity?idPlace=${id}`;
+      return fetch(url, getHeader);
+    },
+    fetchPlaceImages(id) {
+      const url = `${host}/place/images?idPlace=${id}`;
+      return fetch(url, getHeader);
+    },
   },
   cities: {
     fetchAll() {

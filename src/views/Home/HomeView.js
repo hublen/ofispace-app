@@ -8,13 +8,15 @@ import { Map as ImmutableMap } from 'immutable';
 import { ScrollView } from 'react-native';
 
 import { selectActualCity } from '../../redux/selectors/cities';
+import { getActualPlace } from '../../redux/selectors/places';
 import { checkUserLogin } from '../../redux/actions/user';
-import { setUpHomeView } from '../../redux/actions/session';
+import { setUpHomeView, setActualPlace } from '../../redux/actions/session';
 import { navigationPropTypes } from '../../proptypes';
 
 import common from '../../style/common';
 import SectionHeader from '../../components/core/SectionHeader';
 import CitiesCarouselList from '../../components/Cities/CarouselList';
+import PlaceModal from '../../components/Places/PlaceModal';
 import AuthView from '../../components/users/Auth';
 import PlaceCard from '../../components/Places/PlaceCard';
 
@@ -29,9 +31,10 @@ class HomeView extends Component {
   static defaultProps = {
     navigation: null,
     loggingIn: false,
-    places: ImmutableMap({}),
-    cities: ImmutableMap({}),
-    actualCity: ImmutableMap({ }),
+    places: ImmutableMap(),
+    cities: ImmutableMap(),
+    actualCity: ImmutableMap(),
+    actualPlace: ImmutableMap(),
   };
 
   static propTypes = {
@@ -42,6 +45,8 @@ class HomeView extends Component {
     places: ImmutablePropTypes.map,
     checkUserLogin: PropTypes.func.isRequired,
     setUpHomeView: PropTypes.func.isRequired,
+    setActualPlace: PropTypes.func.isRequired,
+    actualPlace: ImmutablePropTypes.map,
   };
 
   componentDidMount() {
@@ -54,6 +59,9 @@ class HomeView extends Component {
     const city = actualCity.get('name');
     return (
       <SafeAreaView style={common.view}>
+        <PlaceModal
+          place={this.props.actualPlace}
+        />
         <ScrollView
           style={common.view}
         >
@@ -67,7 +75,11 @@ class HomeView extends Component {
           />
           <SectionHeader title={city ? `Spaces in ${city}` : 'Spaces'} />
           {this.props.places.toList().map((place) => (
-            <PlaceCard key={place.get('id')} place={place} />
+            <PlaceCard
+              onPress={this.props.setActualPlace}
+              key={place.get('id')}
+              place={place}
+            />
           ))}
         </ScrollView>
       </SafeAreaView>
@@ -76,8 +88,9 @@ class HomeView extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  loggingIn: state.session.get('loggingIn', false),
+  actualPlace: getActualPlace(state),
   actualCity: selectActualCity(state),
+  loggingIn: state.session.get('loggingIn', false),
   cities: state.cities,
   places: state.places,
 });
@@ -85,6 +98,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = ({
   checkUserLogin,
   setUpHomeView,
+  setActualPlace,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeView);
